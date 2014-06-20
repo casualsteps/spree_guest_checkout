@@ -1,0 +1,9 @@
+<% if @order.user_id == nil %>
+  <%= form_for "spree_user", :url => spree.registration_path(@user) do |f| %>
+    <%= f.email_field :email, :value => "#{@order.email}", :placeholder => "#{@order.email}", :disabled => false %>
+    <%= f.password_field :password, :placeholder => "비밀번호" %>
+    <%= f.password_field :password_confirmation, :placeholder => "비밀번호 재입력" %>
+    <%= button_tag "스냅샵 시작하기"  %>
+  <% end %>
+<% end %>
+<br>
