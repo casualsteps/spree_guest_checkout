@@ -1,6 +1,5 @@
 Spree::UserRegistrationsController.class_eval do
   def create
-    logger.debug "yuzong create"
     @user = build_resource(spree_user_params)
     if resource.save
       set_flash_message(:notice, :signed_up)
@@ -8,10 +7,19 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
       respond_with resource, location: after_sign_up_path_for(resource)
+
+      orders = Spree::Order.where("email = ?", @user.email)
+      #updating order informations
+      unless orders == nil
+        orders.each { |order|
+          order.user_id = @user.id
+        }
+        orders.each(&:save)
+      end
     else
       clean_up_passwords(resource)
       render :new
     end 
-    logger.debug "yuzong create"
   end
 end
+
