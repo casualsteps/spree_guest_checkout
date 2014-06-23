@@ -3,13 +3,14 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_guest_checkout'
   s.version     = '2.2.2'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'improve guest checkout process'
+  s.description = '1. add registration form in order complete page \
+                   2. make guest can view their order status'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'Jonghun Yu'
+  s.email     = 'jonghun.yu@luuv.it'
+  s.homepage  = 'https://github.com/casualsteps/spree_guest_checkout'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
