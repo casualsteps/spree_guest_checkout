@@ -5,7 +5,7 @@ Spree::OrdersController.class_eval do
     order = Spree::Order.find_by_number(params[:id]) || current_order
 
     #if url has ship_address_id we don't need token because it comes from the link in order confirm E-mail
-    if params[:ship_address_id] == order.ship_address_id.to_s
+    if order != nil and params[:ship_address_id] == order.ship_address_id.to_s
       session[:access_token] = order.token
     end
 
