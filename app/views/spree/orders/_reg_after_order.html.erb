@@ -1,9 +1,30 @@
-<% if @order.user_id == nil %>
-  <%= form_for "spree_user", :url => spree.registration_path(@user) do |f| %>
-    <%= f.email_field :email, :value => "#{@order.email}", :placeholder => "#{@order.email}", :disabled => false%>
-    <%= f.password_field :password, :placeholder => "비밀번호" %>
-    <%= f.password_field :password_confirmation, :placeholder => "비밀번호 재입력" %>
-    <%= button_tag "스냅샵 시작하기"  %>
-  <% end %>
-<% end %>
 <br>
+
+<% if @order.user_id == nil %>
+  <div class="welcome">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td rowspan="2" valign="top"><%= image_tag "checkout/icon-checked.png" %></td>
+        <th>TIP FOR YOU</th>
+      </tr>
+      <tr>
+        <td>비밀번호를 정하면 지금 바로 회원이 되실 수 있어요. 회원 쇼핑은 지금보다 더 간단해요!</td>
+      </tr>
+    </table>
+
+    <%= form_for "spree_user", :url => spree.registration_path(@user) do |f| %>
+      <%= f.hidden_field :email, :value => "#{@order.email}" %>
+      <%= f.password_field :password, :placeholder => "스냅샵 비밀번호", :class => "password" %>
+      <%= f.password_field :password_confirmation, :placeholder => "비밀번호 재입력" %>
+
+      <div class="joinus">
+        <input type="checkbox" name="agree" class="agree" id="confirm" value="1" checked />
+        <label for="confirm">비밀번호 설정(가입)에 따라 <a href="/pages/terms">이용약관</a>에 동의합니다.</label>
+      </div>
+      <div class="btn-order">
+        <%= button_tag "스냅샵 회원 되기", :class => "btn-dark" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

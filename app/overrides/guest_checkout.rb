@@ -1,5 +1,5 @@
-Deface::Override.new( :virtual_path => 'spree/orders/_complete',
+Deface::Override.new( :virtual_path => 'spree/orders/show',
                       :name         => 'add_registration_form_in_order_complete_page',
-                      :insert_before=> 'ul[class="order-summary"]',
+                      :insert_bottom=> '.result-item',
                       :partial      => 'spree/orders/reg_after_order',
                       :disabled     => false)
