@@ -7,6 +7,8 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
       associate_past_orders
+      associate_address
+      associate_payment_profile
       respond_with resource, location: after_sign_up_path_for(resource)
     else
       clean_up_passwords(resource)
@@ -23,5 +25,23 @@ Spree::UserRegistrationsController.class_eval do
       }
     end
   end
+
+  # Associate the order's address to user's address
+  def associate_address
+    order = Spree::Order.where("email = ?", @user.email).order("created_at").last
+    if order.present?
+      @user.update_attributes(bill_address_id: order.billing_address.id, ship_address_id: order.shipping_address.id)
+    end
+  end
+
+  # Associate the order's payment source to user's payment source
+  def associate_payment_profile
+    order = Spree::Order.where("email = ?", @user.email).order("created_at").last
+    if order.try(:payments).present?
+      payment_source = order.payments.last.source
+      payment_source.update_attributes(user_id: @user.id)
+    end
+  end
+
 end
 
