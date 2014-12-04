@@ -1,5 +1,5 @@
 Spree::UserRegistrationsController.class_eval do
-  def create
+  def guest_registration
     @user = build_resource(spree_user_params)
     if resource.save
       set_flash_message(:notice, :signed_up)
