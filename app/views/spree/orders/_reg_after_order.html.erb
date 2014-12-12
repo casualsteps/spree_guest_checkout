@@ -12,7 +12,7 @@
       </tr>
     </table>
 
-    <%= form_for "spree_user", :url => spree.guest_registration_path(@user) do |f| %>
+    <%= form_for "spree_user", :url => spree.guest_registration_path(@user), :html => {:id => 'spree_guest_user'} do |f| %>
       <%= f.hidden_field :email, :value => "#{@order.email}" %>
       <%= f.password_field :password, :placeholder => "스냅샵 비밀번호", :class => "password" %>
       <%= f.password_field :password_confirmation, :placeholder => "비밀번호 재입력" %>
