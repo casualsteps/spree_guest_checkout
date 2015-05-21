@@ -6,7 +6,7 @@ Spree::OrdersController.class_eval do
 
     #if url has ship_address_id we don't need token because it comes from the link in order confirm E-mail
     if order != nil and params[:ship_address_id] == order.ship_address_id.to_s
-      session[:access_token] = order.token
+      session[:access_token] = order.guest_token
     end
 
     if order
